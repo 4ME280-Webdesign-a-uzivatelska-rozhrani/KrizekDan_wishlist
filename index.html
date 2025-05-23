@@ -1,1 +1,71 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wishlist</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 2em;
+      color: #333;
+    }
+    h1 {
+      color: #d62828;
+    }
+    .item {
+      background: #fff;
+      margin: 0.8em 0;
+      padding: 1em;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    .item a {
+      color: #0077cc;
+      text-decoration: none;
+    }
+    .item a:hover {
+      text-decoration: underline;
+    }
+    .price {
+      font-weight: bold;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎁 Wishlist</h1>
+  <div id="wishlist">Načítání dat...</div>
+
+  <script>
+    const wishlistContainer = document.getElementById('wishlist');
+
+    fetch('https://cdn.jsdelivr.net/gh/4me280-webdesign-a-uzivatelska-rozhrani/KrizekDan_wishlist/wishlist.json')
+      .then(response => {
+        if (!response.ok) throw new Error("Chyba při načítání JSON souboru.");
+        return response.json();
+      })
+      .then(data => {
+        wishlistContainer.innerHTML = '';
+
+        data.sort((a, b) => a.cena - b.cena); // Seřazení podle ceny vzestupně
+
+        data.forEach(item => {
+          const itemDiv = document.createElement('div');
+          itemDiv.className = 'item';
+          itemDiv.innerHTML = `
+            <div><strong>${item.nazev}</strong></div>
+            <div class="price">${item.cena.toLocaleString('cs-CZ')} Kč</div>
+            <div><a href="${item.odkaz}" target="_blank">Odkaz na produkt</a></div>
+          `;
+          wishlistContainer.appendChild(itemDiv);
+        });
+      })
+      .catch(error => {
+        wishlistContainer.innerHTML = `<p style="color:red;">Chyba: ${error.message}</p>`;
+      });
+  </script>
+</body>
+</html>
 
