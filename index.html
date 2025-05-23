@@ -2,101 +2,38 @@
 <html lang="cs">
 <head>
   <meta charset="UTF-8">
-  <title>Wishlist</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      font-family: sans-serif;
-      background: #f9f9f9;
-      padding: 2em;
-    }
-    h1 {
-      color: #d62828;
-    }
-    .item {
-      background: #fff;
-      padding: 1em;
-      margin-bottom: 1em;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    .item input {
-      padding: 0.5em;
-      margin-top: 0.5em;
-      width: 100%;
-      box-sizing: border-box;
-    }
-    .save-btn {
-      margin-top: 0.5em;
-      padding: 0.5em 1em;
-      background: #0077cc;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    .save-btn:disabled {
-      background: #ccc;
-    }
-  </style>
+  <title>Test JSONBin</title>
 </head>
 <body>
-  <h1>🎁 Wishlist</h1>
-  <div id="wishlist">Načítání…</div>
+  <h1>🎁 Wishlist Test</h1>
+  <ul id="items">Načítání...</ul>
 
   <script>
     const BIN_ID = '683040938960c979a5a00b8b';
-    const API_KEY = '$2a$10$06u7rqexaQYsEZhluQjjr.awVK9F59O6l4s/5tpkIsCJt7xCHCqOa'; // ← SEM dosaď svůj klíč
+    const API_KEY = 'TVŮJ_API_KLÍČ'; // ← nahraď svým klíčem
     const ENDPOINT = `https://api.jsonbin.io/v3/bins/${BIN_ID}/latest`;
 
-    async function loadWishlist() {
-      const res = await fetch(ENDPOINT, {
-        headers: { 'X-Master-Key': API_KEY }
+    fetch(ENDPOINT, {
+      headers: { 'X-Master-Key': API_KEY }
+    })
+    .then(res => {
+      if (!res.ok) throw new Error("Chyba při načítání JSONBin");
+      return res.json();
+    })
+    .then(data => {
+      const items = data.record;
+      const ul = document.getElementById('items');
+      ul.innerHTML = '';
+      items.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item.nazev;
+        ul.appendChild(li);
       });
-      const data = await res.json();
-      displayWishlist(data.record);
-    }
-
-    function displayWishlist(items) {
-      const container = document.getElementById('wishlist');
-      container.innerHTML = '';
-      items.forEach((item, index) => {
-        const div = document.createElement('div');
-        div.className = 'item';
-        div.innerHTML = `
-          <strong>${item.nazev}</strong> – ${item.cena} Kč<br>
-          <a href="${item.odkaz}" target="_blank">Odkaz</a><br>
-          <label>🛍️ Koupil:
-            <input type="text" value="${item.koupil ?? ''}" id="koupil-${index}">
-          </label><br>
-          <button class="save-btn" onclick="saveBuyer(${index})">💾 Uložit</button>
-        `;
-        container.appendChild(div);
-      });
-      window.currentItems = items;
-    }
-
-    async function saveBuyer(index) {
-      const newBuyer = document.getElementById(`koupil-${index}`).value.trim();
-      window.currentItems[index].koupil = newBuyer;
-
-      const res = await fetch(`https://api.jsonbin.io/v3/bins/${BIN_ID}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Master-Key': API_KEY
-        },
-        body: JSON.stringify(window.currentItems)
-      });
-
-      if (res.ok) {
-        alert("Uloženo!");
-      } else {
-        alert("Chyba při ukládání.");
-      }
-    }
-
-    loadWishlist();
+    })
+    .catch(err => {
+      document.getElementById('items').innerHTML = '❌ Nepodařilo se načíst data: ' + err.message;
+      console.error(err);
+    });
   </script>
 </body>
 </html>
