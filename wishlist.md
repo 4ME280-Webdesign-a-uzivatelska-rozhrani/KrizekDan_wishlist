@@ -3,7 +3,7 @@
 * **Nintendo Switch 2** - 12 500
 ![](https://cdn.alza.cz/Foto/ImgGalery/Image/nintendo-switch-2-key-art.jpg)
 * **Donkey Kong Bananza** - 2 000
-! [] (https://www.herni-svet.cz/shopFiles/16x9-DonkeyKongBananza.jpg)
+![](https://www.herni-svet.cz/shopFiles/16x9-DonkeyKongBananza.jpg)
 * LEGO 72037 - 4 300
 * LEGO 31217 - 1 400
 * LEGO 60470 - 5 000
