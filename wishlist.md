@@ -1,22 +1,22 @@
 # Wishlist
 
-* **Nintendo Switch 2** - 12 500
-![](https://cdn.alza.cz/Foto/ImgGalery/Image/nintendo-switch-2-key-art.jpg)
-* **Donkey Kong Bananza** - 2 000
-![](https://www.herni-svet.cz/shopFiles/16x9-DonkeyKongBananza.jpg)
+* Nintendo Switch 2 - 12 500
+https://www.alza.cz/gaming/nintendo-switch-2-mario-kart-world-d12877846.htm
+* Donkey Kong Bananza - 2 000
+https://www.alza.cz/gaming/donkey-kong-bananza-nintendo-switch-2-d12877864.htm
 * LEGO 72037 - 4 300
-![](https://www.lego.com/cdn/cs/set/assets/blt9b9bd9113f7f11d9/72037_Prod_en-gb.png?fit=bounds&format=jpg&quality=80&width=1500&height=1500&dpr=1)
+https://www.alza.cz/hracky/lego-super-mario-72037-mario-kart-mario-a-standard-kart-d12914576.htm
 * LEGO 31217 - 1 400
-![](https://www.lego.com/cdn/cs/set/assets/blt939b9df42aef7bf1/31217_Prod_en-gb.png)
+https://www.alza.cz/hracky/lego-art-31217-kolekce-zvirat-tygr-d12914457.htm
 * LEGO 60470 - 5 000
-![](https://www.lego.com/cdn/cs/set/assets/blt8d1fd294abc61695/60470_Prod_en-gb.png?fit=bounds&format=jpg&quality=80&width=1500&height=1500&dpr=1)
+https://www.alza.cz/hracky/lego-city-60470-polarni-expres-pro-pruzkumniky-arktidy-d12914506.htm
 * LEGO 42674 - 2 200
-![]()
+https://www.lego.com/cs-cz/product/comic-book-and-game-store-42674
 * PS5 Pro - 20 000
-![](https://cdn.alza.cz/Foto/ImgGalery/Image/playstation-5-pro-design_1.jpg)
+https://www.alza.cz/gaming/playstation-5-pro?dq=12543328
 * Stolní hra: Vlkodlaci za úsvitu - 300
-![](https://www.sparkys.cz/data/cache/thumb_1200-630-12-0/products/1117884/d809c9a9edc2439af29cb58e02f49277/958-275533_1.jpg?s=2350307626e56cc2b7fe8d107306b6e7)
+https://www.alza.cz/hracky/vlkodlaci-za-usvitu-d7819662.htm
 * Stolní hra: Klub sběratelů - 1 100
-![](https://admin.planetaher.cz/upload/product-images/1000x1000/klub-sberatelu-4.jpg)
+https://www.alza.cz/hracky/klub-sberatelu-d12477696.htm
 * Hori Piranha Plant Camera (Switch 2) - 1 000
-![](https://store.nintendo.co.za/cdn/shop/files/Packshot_PNG_1000x1000_png.jpg?v=1743746415)
+https://www.alza.cz/gaming/nintendo-switch-2-piranha-plant-camera-d12894052.htm
