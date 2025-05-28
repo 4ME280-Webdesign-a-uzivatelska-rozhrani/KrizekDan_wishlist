@@ -1,39 +1,113 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8">
-  <title>Test JSONBin</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wishlist</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 2rem;
+    }
+    .item {
+      background: white;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .item img {
+      width: 120px;
+      height: auto;
+      border-radius: 6px;
+    }
+    .info {
+      flex: 1;
+    }
+    .info h2 {
+      margin: 0 0 0.2rem;
+    }
+    .info p {
+      margin: 0.2rem 0;
+    }
+    .reserve {
+      margin-top: 0.5rem;
+    }
+    .reserve input {
+      padding: 0.3rem;
+    }
+    .reserve button {
+      padding: 0.3rem 0.6rem;
+    }
+  </style>
 </head>
 <body>
-  <h1>🎁 Wishlist Test</h1>
-  <ul id="items">Načítání...</ul>
+  <h1>🎁 Můj Wishlist</h1>
+  <div id="wishlist"></div>
 
   <script>
-    const BIN_ID = '683040938960c979a5a00b8b';
-    const API_KEY = 'TVŮJ_API_KLÍČ'; // ← nahraď svým klíčem
-    const ENDPOINT = `https://api.jsonbin.io/v3/bins/${BIN_ID}/latest`;
+    const BIN_ID = "683425758561e97a501b9b4d";
+    const API_KEY = "$2a$10$06u7rqexaQYsEZhluQjjr.awVK9F59O6l4s/5tpkIsCJt7xCHCqOa";
+    const BIN_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
 
-    fetch(ENDPOINT, {
-      headers: { 'X-Master-Key': API_KEY }
-    })
-    .then(res => {
-      if (!res.ok) throw new Error("Chyba při načítání JSONBin");
-      return res.json();
-    })
-    .then(data => {
-      const items = data.record;
-      const ul = document.getElementById('items');
-      ul.innerHTML = '';
-      items.forEach(item => {
-        const li = document.createElement('li');
-        li.textContent = item.nazev;
-        ul.appendChild(li);
+    async function fetchWishlist() {
+      const res = await fetch(BIN_URL, {
+        headers: {
+          "X-Master-Key": API_KEY
+        }
       });
-    })
-    .catch(err => {
-      document.getElementById('items').innerHTML = '❌ Nepodařilo se načíst data: ' + err.message;
-      console.error(err);
-    });
+      const json = await res.json();
+      return json.record;
+    }
+
+    async function updateReservation(index, name) {
+      const data = await fetchWishlist();
+      data[index].reservedBy = name;
+
+      await fetch(BIN_URL, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Master-Key": API_KEY
+        },
+        body: JSON.stringify(data)
+      });
+
+      renderWishlist();
+    }
+
+    async function renderWishlist() {
+      const list = await fetchWishlist();
+      const container = document.getElementById("wishlist");
+      container.innerHTML = "";
+
+      list.forEach((item, index) => {
+        const div = document.createElement("div");
+        div.className = "item";
+        div.innerHTML = `
+          <img src="${item.imageUrl}" alt="${item.title}" />
+          <div class="info">
+            <h2>${item.title}</h2>
+            <p><strong>${item.price}</strong></p>
+            <p>${item.description}</p>
+            <p><a href="${item.buyUrl}" target="_blank">Koupit</a></p>
+            <p>Rezervováno: <strong>${item.reservedBy || "Nikým"}</strong></p>
+            <div class="reserve">
+              <input type="text" placeholder="Tvé jméno" id="name-${index}" />
+              <button onclick="updateReservation(${index}, document.getElementById('name-${index}').value)">Zarezervovat</button>
+            </div>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    renderWishlist();
   </script>
 </body>
 </html>
